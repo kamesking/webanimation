@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <style>
+    div {
+      width: 100px;
+      height: 100px;
+      background-color: lime;
+    }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <script>
+    // animation rules
+    const rules = {
+      moveToRight: parameters => {
+        return {
+          keyframes: { transform: [`translate(${ parameters.from })`, `translate(${ parameters.to })`]},
+          effect: { duration: parameters.duration, delay: parameters.delay, fill: "forwards" }
+        }
+      },
+      fadeOut: parameters => {
+        return {
+          keyframes: { opacity: [parameters.from, parameters.to] },
+          effect: { duration: parameters.duration, delay: parameters.delay, easing: "ease-out", fill: "forwards" }
+        }
+      },
+	  rotate: parameters => {
+        return {
+          keyframes: { transform: [parameters.one, parameters.two, parameters.three] },
+          effect: { duration: parameters.duration, delay: parameters.delay, easing: "ease-out", fill: "forwards" }
+        }
+      },
+    };
+
+    // user animation
+    const animations = [
+      //{ name: "moveToRight", target: "div", from: "0px", to: "100px", duration: 1000, delay: 0 },
+      { name: "fadeOut", target: "div", from: 1, to: 0, duration: 1000, delay: 500 },
+	  { name: "rotate", target: "div", one: "rotate(0deg) translate(0,0)", two: "rotate(-90deg)", three:"rotate(-180deg) translate(-300px, 0) scale(0.5, 0.5)", duration: 1000, delay: 0 },
+    ];
+
+    // engine
+    for (let animation of animations) {
+      const rule = rules[animation.name](animation);
+      const target = document.querySelector("div");
+      target.animate(rule.keyframes, rule.effect);
+    }
+    </script>
+  </body>
+</html>
