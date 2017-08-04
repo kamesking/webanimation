@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <style>
+    #target {
+      background-color: lime;
+      width: 200px;
+      height: 200px;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="target"></div>
+
+    <script>
+    const target = document.querySelector("#target");
+
+    function move(element, sx, sy, ex, ey, duration, delay) {
+      element.animate(
+        { transform: [`translate(${sx}px, ${sy}px)`, `translate(${ex}px, ${ey}px)`] },
+        { duration: duration, delay: delay } );
+    }
+
+    function bounce(element, sy, ey, duration, count, delay) {
+      element.animate(
+        [
+          { transform: `translateY(${sy}px)`, offset: 0 },
+          { transform: `translateY(${ey}px)`, offset: 0.5 },
+          { transform: `translateY(${sy}px)`, offset: 1 },
+        ],
+        { duration: duration,
+          delay: delay,
+          iterations: count,
+          composite: "add"} );
+    }
+
+    function shake(element, sx, ex, duration, count, delay) {
+      element.animate(
+        [
+          { transform: `translateX(${sx}px)`, offset: 0 },
+          { transform: `translateX(${ex}px)`, offset: 0.5 },
+          { transform: `translateX(${sx}px)`, offset: 1 },
+        ],
+        { duration: duration,
+          delay: delay,
+          iterations: count,
+          composite: "add"} );
+    }
+
+    function flash(element, duration, count, delay) {
+      element.animate(
+        [
+          { opacity: 1, offset: 0 },
+          { opacity: 0, offset: 0.25 },
+          { opacity: 1, offset: 0.5 },
+          { opacity: 0, offset: 0.75 },
+          { opacity: 1, offset: 1 },
+        ],
+        {
+          duration: duration,
+          delay: delay,
+          iterations: count,
+          composite: "add",
+          easing: "ease-in"
+        } );
+    }
+
+    //bounce(target, 0, 10, 100, 10, 0);
+  //shake(target, -10, 10, 100, 10, 0);
+    flash(target, 1000, 10, 0);
+    //flash(target, 100, 10, 0);
+  //  move(target, 0, 0, 500, -200, 1000, 1000);
+    </script>
+  </body>
+</html>

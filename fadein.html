@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <style>
+    #target {
+      background-color: lime;
+      width: 200px;
+      height: 200px;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="target"></div>
+
+    <script>
+    const target = document.querySelector("#target");
+
+    function fade(element,sx,ex,count, duration ,delay)  {
+      element.animate(
+        [
+      { transform: `translateX(${sx}px)`,opacity:0, offset: 0 },
+      { transform: `translateX(${ex}px)`,opacity:1,offset: 1},
+    ],
+    { duration: duration,
+      delay: delay,
+      iterations: count,
+      composite: "add"} );
+
+  };
+
+
+   fade(target,0,200,1,1000,0);
+
+    //bounce(target, 0, 10, 100, 10, 0);
+  //  headshake(target, 10, 100,0);
+    //flash(target, 1000, 10, 0);
+    //flash(target, 100, 10, 0);
+    //move(target, 0, 0, 500, -200, 1000, 1000);
+    </script>
+  </body>
+</html>
